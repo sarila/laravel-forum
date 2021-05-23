@@ -19,6 +19,7 @@ class CreateDiscussionsTable extends Migration
             $table->string('title');
             $table->longtext('content');
             $table->string('slug')->unique();
+            $table->unsignedBigInteger('reply_id')->nullable();
             $table->unsignedBigInteger('channel_id');
             $table->timestamps();
         });
