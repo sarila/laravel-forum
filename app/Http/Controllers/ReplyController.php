@@ -44,7 +44,10 @@ class ReplyController extends Controller
             'discussion_id' => $discussion->id,
         ]);
 
-        $discussion->user->notify(new NewReplyAdded($discussion));
+        if ($discussion->user->id != auth()->user()->id) {
+            $discussion->user->notify(new NewReplyAdded($discussion));
+
+        }
 
         Session::flash('success', 'Reply Added');
         return redirect()->back();

@@ -14,7 +14,7 @@ class DiscussionController extends Controller
 
     public function __construct() {
 
-        $this->middleware('auth')->only(['create', 'store']);
+        $this->middleware(['auth', 'verified'])->only(['create', 'store']);
     }
 
 
@@ -25,7 +25,7 @@ class DiscussionController extends Controller
      */
     public function index()
     {
-        $discussions = Discussion::paginate(5); 
+        $discussions = Discussion::filterByChannels()->paginate(5); 
         return view ('discussions.index', compact('discussions'));
     }
 
