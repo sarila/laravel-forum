@@ -7,6 +7,7 @@ use App\Models\Discussion;
 use App\Models\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Notifications\NewReplyAdded;
 
 class ReplyController extends Controller
 {
@@ -42,6 +43,8 @@ class ReplyController extends Controller
             'content' => $request->reply,
             'discussion_id' => $discussion->id,
         ]);
+
+        $discussion->user->notify(new NewReplyAdded($discussion));
 
         Session::flash('success', 'Reply Added');
         return redirect()->back();

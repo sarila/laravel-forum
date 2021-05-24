@@ -5,7 +5,7 @@
 
 
 @foreach($discussions as $discussion)
-    <div class="card">
+    <div class="card my-3">
    
         @include('partials.discussion-header')
         

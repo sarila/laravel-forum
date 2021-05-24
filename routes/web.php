@@ -25,4 +25,6 @@ Route::resource('discussions', DiscussionController::class);
 
 Route::resource('discussions/{discussion}/replies', ReplyController::class);
 
+Route::get('users/notifications', [App\Http\Controllers\UserController::class, 'notifications'])->name('notications');
+
 Route::post('discussions/{discussion}/replies/{reply}/mark-as-best', 'DiscussionController@reply')->name('discussions.best-reply');

@@ -16,9 +16,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('css')
     <style type="text/css">
-        .btn-info {
+        .btn-info, .badge-info{
             color: white;
-            width: 100%;
         }
     </style>
 </head>
@@ -36,7 +35,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                       @auth
+                        <a href="{{route('notications')}}" class="nav-link">
+                            <li class="nav-item">
+                                <span class="badge badge-info">
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                                    Unread Notifications
+                                </span>
+                            </li>
+                        </a>
+                       @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -82,9 +90,9 @@
                 <div class="row">
                     <div class="col-md-4">
                         @auth
-                            <a href="{{route('discussions.create')}}" class="btn btn-info my-2">Add Discussion</a>
+                            <a href="{{route('discussions.create')}}" class="btn btn-info my-2" style="width: 100%;">Add Discussion</a>
                         @else
-                            <a href="{{route('discussions.create')}}" class="btn btn-info my-2">Sign in to add discussion</a>
+                            <a href="{{route('discussions.create')}}" class="btn btn-info my-2" style="width: 100%;">Sign in to add discussion</a>
                         @endauth
                         <div class="card">
                             <div class="card-header">
