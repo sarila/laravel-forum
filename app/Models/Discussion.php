@@ -6,6 +6,7 @@ use App\Models\Reply;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\ReplyMarkedAsBestReply;
 
 class Discussion extends Model
 {
@@ -30,6 +31,7 @@ class Discussion extends Model
         $this->update([
             'reply_id' => $reply->id,
         ]);
+        $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion));
     }
 
     public function bestReply () {
